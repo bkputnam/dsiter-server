@@ -80,6 +80,7 @@ public abstract class DatasetServlet extends HttpServlet {
 		// Actual logic goes here.
 		CsvWriter writer = new CsvWriter();
 		try {
+			response.setContentType(writer.getMimeType().toString());
 			writer.writeTo(it, response.getOutputStream());
 		}
 		catch (Exception e) {
