@@ -27,12 +27,24 @@ public class PipeParser {
         for(int i=0; i<chunks.length; i++) {
             String chunk = chunks[i];
             int firstBracketIndex = chunk.indexOf('(');
-            if (chunk.charAt(chunk.length()-1) != ')') {
-                throw new FailedToParsePipeException(chunk);
-            }
+            char lastChar = chunk.charAt(chunk.length()-1);
 
-            String pipeName = chunk.substring(0, firstBracketIndex);
-            String pipeArgs = chunk.substring(firstBracketIndex+1, chunk.length()-1);
+            String pipeName = null;
+            String pipeArgs = null;
+            if (firstBracketIndex == -1) {
+                if (lastChar == ')') {
+                    throw new FailedToParsePipeException(chunk);
+                }
+                pipeName = chunk;
+                pipeArgs = "";
+            }
+            else {
+                if (lastChar != ')') {
+                    throw new FailedToParsePipeException(chunk);
+                }
+                pipeName = chunk.substring(0, firstBracketIndex);
+                pipeArgs = chunk.substring(firstBracketIndex+1, chunk.length()-1);
+            }
 
             pipes[i] = pipeMap.getPipe(pipeName, pipeArgs);
         }
