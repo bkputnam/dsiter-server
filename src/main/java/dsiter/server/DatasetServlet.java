@@ -79,7 +79,20 @@ public abstract class DatasetServlet extends HttpServlet {
 
 		// Actual logic goes here.
 		CsvWriter writer = new CsvWriter();
-		writer.writeTo(it, response.getOutputStream());
+		try {
+			writer.writeTo(it, response.getOutputStream());
+		}
+		catch (Exception e) {
+			if (!response.isCommitted()) {
+				response.setStatus(500);
+				response.setContentType("text/plain");
+			}
+
+			PrintWriter w = response.getWriter();
+			w.println(e.toString());
+			e.printStackTrace(w);
+			return;
+		}
 	}
 
 	public void destroy()
