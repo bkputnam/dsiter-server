@@ -22,10 +22,14 @@ public class PipeParser {
 
     public IPipe[] parsePipes(String pipeStr) throws ClientErrorException {
         String[] chunks = split(pipeStr);
-        IPipe[] pipes = new IPipe[chunks.length];
+        List<IPipe> pipes = new ArrayList<>();
 
         for(int i=0; i<chunks.length; i++) {
-            String chunk = chunks[i];
+            String chunk = chunks[i].trim();
+            if (chunk.length() == 0) {
+                continue;
+            }
+
             int firstBracketIndex = chunk.indexOf('(');
             char lastChar = chunk.charAt(chunk.length()-1);
 
@@ -46,10 +50,10 @@ public class PipeParser {
                 pipeArgs = chunk.substring(firstBracketIndex+1, chunk.length()-1);
             }
 
-            pipes[i] = pipeMap.getPipe(pipeName, pipeArgs);
+            pipes.add(pipeMap.getPipe(pipeName, pipeArgs));
         }
 
-        return pipes;
+        return pipes.toArray(new IPipe[0]);
     }
 
     static String[] split(String pipeStr) throws ClientErrorException {

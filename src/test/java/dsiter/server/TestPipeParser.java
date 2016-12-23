@@ -52,4 +52,11 @@ public class TestPipeParser {
                 new Integer[] { 4 }
         );
     }
+
+    @Test
+    public void testParserEmptyString() throws Exception {
+        IPipe[] pipes = new PipeParser().parsePipes("");
+        assertNotNull(pipes);
+        assertEquals(0, pipes.length);
+    }
 }
