@@ -10,7 +10,7 @@ import org.junit.Test;
 public class TestDefaultPipeMap {
 
     @Test
-    public void testFilterPipe() throws ClientErrorException {
+    public void testFilterPipe() throws Exception {
         IPipe pipe = new DefaultPipeMap().getPipe("filter", "value%2=0");
         IDatasetIterator it = new RangeIterator(10).pipe(pipe);
         IterUtils.assertValues(
@@ -21,7 +21,7 @@ public class TestDefaultPipeMap {
     }
 
     @Test
-    public void testFirstPipe() throws ClientErrorException {
+    public void testFirstPipe() throws Exception {
         IPipe pipe = new DefaultPipeMap().getPipe("first", "");
         IDatasetIterator it = new RangeIterator(10).pipe(pipe);
         IterUtils.assertValues(
@@ -32,7 +32,7 @@ public class TestDefaultPipeMap {
     }
 
     @Test
-    public void testLastPipe() throws ClientErrorException {
+    public void testLastPipe() throws Exception {
         IPipe pipe = new DefaultPipeMap().getPipe("last", "");
         IDatasetIterator it = new RangeIterator(10).pipe(pipe);
         IterUtils.assertValues(
@@ -43,7 +43,7 @@ public class TestDefaultPipeMap {
     }
 
     @Test
-    public void testRenamePipe() throws ClientErrorException {
+    public void testRenamePipe() throws Exception {
         IPipe pipe = new DefaultPipeMap().getPipe("rename", "value, foo");
         IDatasetIterator it = new RangeIterator(10).pipe(pipe);
         IterUtils.assertValues(
@@ -54,7 +54,7 @@ public class TestDefaultPipeMap {
     }
 
     @Test
-    public void testSkipPipe() throws ClientErrorException {
+    public void testSkipPipe() throws Exception {
         IPipe pipe = new DefaultPipeMap().getPipe("skip", "5");
         IDatasetIterator it = new RangeIterator(10).pipe(pipe);
         IterUtils.assertValues(
@@ -65,7 +65,7 @@ public class TestDefaultPipeMap {
     }
 
     @Test
-    public void testStridePipe() throws ClientErrorException {
+    public void testStridePipe() throws Exception {
         IPipe pipe = new DefaultPipeMap().getPipe("stride", "5");
         IDatasetIterator it = new RangeIterator(10).pipe(pipe);
         IterUtils.assertValues(
@@ -76,7 +76,7 @@ public class TestDefaultPipeMap {
     }
 
     @Test
-    public void testTakePipe() throws ClientErrorException {
+    public void testTakePipe() throws Exception {
         IPipe pipe = new DefaultPipeMap().getPipe("take", "5");
         IDatasetIterator it = new RangeIterator(10).pipe(pipe);
         IterUtils.assertValues(

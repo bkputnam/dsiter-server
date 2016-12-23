@@ -40,7 +40,7 @@ public class TestPipeParser {
     }
 
     @Test
-    public void testParser1() throws ClientErrorException {
+    public void testParser1() throws Exception {
         IPipe[] pipes = new PipeParser().parsePipes("filter(value%2=0)|skip(2)|first");
         IDatasetIterator it = new RangeIterator(10);
         for(IPipe p : pipes) {
