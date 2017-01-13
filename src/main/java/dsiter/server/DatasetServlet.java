@@ -16,8 +16,8 @@ import java.net.URLDecoder;
 
 public abstract class DatasetServlet extends HttpServlet {
 
-	private IDataset dataset;
-	private PipeParser pipeParser;
+	protected IDataset dataset;
+	protected PipeParser pipeParser;
 
 	public DatasetServlet(IDataset dataset) {
 		this(dataset, new DefaultPipeMap());
@@ -89,10 +89,7 @@ public abstract class DatasetServlet extends HttpServlet {
 				response.setContentType("text/plain");
 			}
 
-			PrintWriter w = response.getWriter();
-			w.println(e.toString());
-			e.printStackTrace(w);
-			return;
+			throw new ServletException(e);
 		}
 	}
 
