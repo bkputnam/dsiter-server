@@ -13,8 +13,10 @@ public class DefaultPipeMap implements IPipeMap {
             case "last": return getLastPipe(args);
             case "rename": return getRenamePipe(args);
             case "skip": return getSkipPipe(args);
+            case "skipWhile": return getSkipWhilePipe(args);
             case "stride": return getStridePipe(args);
             case "take": return getTakePipe(args);
+            case "takeWhile": return getTakeWhilePipe(args);
             default:
                 throw new IllegalArgumentException("Unrecognized pipe: \"" + pipeName + "\"");
         }
@@ -60,6 +62,10 @@ public class DefaultPipeMap implements IPipeMap {
         return new SkipPipe(skip);
     }
 
+    private static IPipe getSkipWhilePipe(String args) throws ClientErrorException {
+        return new SkipWhilePipe(args);
+    }
+
     private static IPipe getStridePipe(String args) throws ClientErrorException {
         int stride;
         try {
@@ -80,5 +86,9 @@ public class DefaultPipeMap implements IPipeMap {
             throw new InvalidPipeArgumentException("take", args);
         }
         return new TakePipe(take);
+    }
+
+    private static IPipe getTakeWhilePipe(String args) throws ClientErrorException {
+        return new TakeWhilePipe(args);
     }
 }
