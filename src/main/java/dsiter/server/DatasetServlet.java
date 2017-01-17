@@ -68,8 +68,16 @@ public abstract class DatasetServlet extends HttpServlet {
 			return;
 		}
 
-		for(IPipe p : pipes) {
-			it = it.pipe(p);
+		try {
+			for (IPipe p : pipes) {
+				it = it.pipe(p);
+			}
+		}
+		catch (IOException e) {
+			throw e;
+		}
+		catch (Exception e) {
+			throw new ServletException(e);
 		}
 
 		// TODO - don't hardcode CSV writer
